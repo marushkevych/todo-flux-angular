@@ -14,6 +14,8 @@ var ErrorCodes = {
 
 
 function translateErrorCode () {
-    return ErrorCodes[errorCode] || errorCode;
-};
+    return function(errorCode) {
+        return ErrorCodes[errorCode] || errorCode;
+    };
+}
     
