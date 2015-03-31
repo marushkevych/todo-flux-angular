@@ -1,0 +1,68 @@
+
+<a id="errorAnchor"></a> 
+<br><br>
+<span us-spinner="{top:'50%', left:'50%'}" spinner-key="global-spinner"></span>
+
+<h2 id="errorMsg" ng-show="errorMsg" class="error errorinstructions ng-cloak" ng-cloak >
+    <button type="button" class="close" ng-click="hideError()">&times;</button>
+    {{errorMsg | translateErrorCode}} 
+</h2>
+
+<section id="todoapp">
+    <div>
+        <header>
+            <h1>todos</h1>
+            <input id="new-todo" ng-model="newTodo" ng-keydown="add($event)" placeholder="What needs to be done?">
+        </header>
+        <div>
+            <section id="main">
+                
+                
+                <ul id="todo-list">
+                    <li ng-class="{completed: todo.completed}" ng-repeat="todo in todos | orderBy:'id'">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" ng-change="toggle(todo)" ng-model="todo.completed">
+                            <label>{{todo.name}}</label>
+                            <button class="destroy" ng-click="remove(todo)"></button>
+                        </div>
+                    </li>
+                </ul>
+
+                
+                <footer id="footer" ng-show='totalCount'>
+                    <span id="todo-count">
+                            <strong>{{activeCount}} items left</strong>
+                    </span><ul id="filters">
+                        <li>
+                            <a href="#/todo/all" esi-active>All</a>
+                        </li>
+                        <li>
+                            <a href="#/todo/active" esi-active>Active</a>
+                        </li>
+                        <li>
+                            <a href="#/todo/completed" esi-active>Completed</a>
+                        </li>
+                    </ul>
+                    <button id="clear-completed" ng-click="clearCompleted()" ng-show="completedCount">Clear completed</button>
+                </footer>
+                <footer id="footer" >
+                    <ul id="filters">
+                        <li ng-show='hasUndo()'>
+                            <a href="" ng-click='undo()' class='selected'>Undo</a>
+                        </li>
+                        <li ng-show='hasRedo()'>
+                            <a href="" ng-click='redo()' class='selected'>Redo</a>
+                        </li>
+                    </ul>
+                </footer>
+            </section>
+        </div>
+    </div>
+</section>
+<footer id="info">
+    <!--<p>Double-click to edit a todo</p>-->
+    <p>Created by ESI</p>
+    <p>Styles by <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
+
+
