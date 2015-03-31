@@ -1,7 +1,7 @@
 'use strict';
 var uuid = require('node-uuid');
 require('./app');
-require('../../bower_components/angular-mocks/angular-mocks.js');
+require('../bower_components/angular-mocks/angular-mocks.js');
 
 
 var module = angular.module('templateApp', ['app', 'ngMockE2E']);
