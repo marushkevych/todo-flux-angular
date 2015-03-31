@@ -36,25 +36,7 @@ module.exports = function(grunt) {
             },
             all: ['app/js/**/*.js', '!app/js/translations.js']
         },
-        karma: {
-            unit: {
-                configFile: 'test/karma.conf.js',
-                runnerPort: 9999,
-                browsers: ['PhantomJS']
-            },
-            spec: {
-                configFile: 'test/karma.conf.js',
-                singleRun: true,
-                browsers: ['PhantomJS'],
-                reporters: ['spec']
-            },
-            e2e: {
-                configFile: 'test/karma-e2e.conf.js',
-                singleRun: true,
-                browsers: ['PhantomJS'],
-                reporters: ['spec']
-            },
-        },
+
         connect: {
             options: {
                 base: 'app'
@@ -78,53 +60,18 @@ module.exports = function(grunt) {
             dev: {
                 src: './app/js/todoAppDev.js',
                 dest: 'app/dist/bundle.js'
-            },
-            test: {
-                src: './test/unit/**/*Spec.js',
-                dest: 'test/unit/spec-bundle.js'
             }
-        },
-        
-        nggettext_extract: {
-            pot: {
-                files: {
-                    'po/template.pot': ['app/templates/*.html','app/js/**/*.js']
-                }
-            },
-        },
-
-        nggettext_compile: {
-            all: {
-                files: {
-                    'app/js/translations.js': ['po/*.po']
-                }
-            },
         }
-        
 
     });
 
 
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-watchify');
-    grunt.loadNpmTasks('grunt-angular-gettext');
-
-    // Default - jshint and all tests
-    grunt.registerTask('default', ['jshint', 'watchify', 'karma:spec', 'connect:test']);
-
-    // run unit tests continuously (watch fot changes)
-    grunt.registerTask('unit', ['watchify:test','karma:unit']);
-    
-    // run unit tests once and generate specs
-    grunt.registerTask('spec', ['watchify:test','karma:spec']);
-    
-    // run e2e tests
-    grunt.registerTask('e2e', ['watchify:dev','connect:test', 'karma:e2e']);
 
 
-    grunt.registerTask('server', ['connect:server', 'watchify:dev:keepalive']);
+    grunt.registerTask('default', ['connect:server', 'watchify:dev:keepalive']);
     
 
 };
